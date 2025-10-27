@@ -249,6 +249,45 @@
         }
         /* --- END OF ADDED STYLES --- */
 
+        /* --- CONTAINER FOR BUTTONS BENEATH LECTURE --- */
+        .lecture-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Space between buttons */
+            margin-bottom: 25px; /* Space before MCQs */
+            flex-wrap: wrap; /* For small screens */
+        }
+
+        /* --- NEW TTS BUTTON STYLE (GREEN) --- */
+        .tts-button {
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            background-color: #4CAF50; /* Green */
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #388E3C;
+            font-family: Arial, 'Times New Roman', serif;
+            font-size: 0.9em;
+            display: inline-block;
+            transition: background-color 0.3s;
+            margin-top: 10px; /* Match the translation button's margin */
+        }
+
+        .tts-button:hover {
+            background-color: #45a049;
+        }
+
+        /* --- STYLE FOR TTS BUTTON WHEN SPEAKING (RED) --- */
+        .tts-button.speaking {
+            background-color: #F44336; /* Red */
+            border-color: #D32F2F;
+        }
+        .tts-button.speaking:hover {
+            background-color: #e53935;
+        }
+        /* --- END OF TTS STYLES --- */
+
         /* --- ADDED INSTITUTE TITLE STYLES --- */
         .institute-title {
             text-align: center;
@@ -339,13 +378,21 @@
                 <p>Engineering ethics is the moral framework for engineers. It guides decisions to prioritize public safety, societal well-being, and environmental protection. This framework builds public trust in technology and infrastructure. Key principles include upholding honesty and integrity by providing accurate data and avoiding shortcuts. Engineers must ensure long-term safety and durability in their designs.</p>
                 <p>Environmental responsibility, such as using sustainable materials, is crucial. Engineers must also maintain professional competence, avoid conflicts of interest, and accept responsibility for their work. Adhering to these principles ensures that engineering benefits society, maintains trust, and leads to responsible innovation for future generations.</p>
             </div>
-            <!-- ADDED LECTURE TRANSLATION DROP SECTION -->
-            <details class="translation-drop" style="margin-bottom: 25px;">
-                <summary>Show Translation</summary>
-                <p class="arabic-text" dir="rtl" style="margin-top: 10px; text-align: right; font-style: normal;">
-                    أخلاقيات الهندسة هي الإطار الأخلاقي للمهندسين. إنها توجه القرارات لإعطاء الأولوية للسلامة العامة، ورفاهية المجتمع، وحماية البيئة. يبني هذا الإطار ثقة الجمهور في التكنولوجيا والبنية التحتية. تشمل المبادئ الأساسية التمسك بالصدق والنزاهة من خلال تقديم بيانات دقيقة وتجنب الاختصارات. يجب على المهندسين ضمان السلامة والمتانة على المدى الطويل في تصميماتهم. تعد المسؤولية البيئية، مثل استخدام المواد المستدامة، أمراً بالغ الأهمية. يجب على المهندسين أيضًا الحفاظ على الكفاءة المهنية، وتجنب تضارب المصالح، وقبول المسؤولية عن عملهم. يضمن الالتزام بهذه المبادئ أن تفيد الهندسة المجتمع، وتحافظ على الثقة، وتؤدي إلى ابتكار مسؤول للأجيال القادمة.
-                </p>
-            </details>
+
+            <!-- MODIFIED: Button Container -->
+            <div class="lecture-controls">
+                <!-- ADDED TTS BUTTON -->
+                <button class="tts-button" data-target="#unit1 .lecture-notes">
+                    Pronounce Text &#128266; <!-- Speaker Icon -->
+                </button>
+                <!-- Existing Translation Dropdown -->
+                <details class="translation-drop">
+                    <summary>Show Translation</summary>
+                    <p class="arabic-text" dir="rtl" style="margin-top: 10px; text-align: right; font-style: normal;">
+                        أخلاقيات الهندسة هي الإطار الأخلاقي للمهندسين. إنها توجه القرارات لإعطاء الأولوية للسلامة العامة، ورفاهية المجتمع، وحماية البيئة. يبني هذا الإطار ثقة الجمهور في التكنولوجيا والبنية التحتية. تشمل المبادئ الأساسية التمسك بالصدق والنزاهة من خلال تقديم بيانات دقيقة وتجنب الاختصارات. يجب على المهندسين ضمان السلامة والمتانة على المدى الطويل في تصميماتهم. تعد المسؤولية البيئية، مثل استخدام المواد المستدامة، أمراً بالغ الأهمية. يجب على المهندسين أيضًا الحفاظ على الكفاءة المهنية، وتجنب تضارب المصالح، وقبول المسؤولية عن عملهم. يضمن الالتزام بهذه المبادئ أن تفيد الهندسة المجتمع، وتحافظ على الثقة، وتؤدي إلى ابتكار مسؤول للأجيال القادمة.
+                    </p>
+                </details>
+            </div>
 
             <h2>MCQ Items</h2>
             <div class="mcq-section">
@@ -449,13 +496,21 @@
                 <p>Nanotechnology is the study and use of extremely small things, controlling matter at the nanoscale (1 to 100 nanometers). Its goal is to create new materials and devices with unique properties not found in larger forms. For example, materials can be made stronger, lighter, or better at conducting electricity.</p>
                 <p>This field is revolutionizing many industries. In electronics, it leads to smaller, faster devices. In medicine, it allows for targeted drug delivery and new diagnostic tools. However, nanotechnology also presents challenges. The new properties of nanomaterials could have unintended consequences or potential risks for health and the environment. Careful research is needed to understand these risks and ensure safe development.</p>
             </div>
-            <!-- ADDED LECTURE TRANSLATION DROP SECTION -->
-            <details class="translation-drop" style="margin-bottom: 25px;">
-                <summary>Show Translation</summary>
-                <p class="arabic-text" dir="rtl" style="margin-top: 10px; text-align: right; font-style: normal;">
-                    تكنولوجيا النانو هي دراسة واستخدام الأشياء الصغيرة للغاية، والتحكم في المادة على مقياس النانو (من 1 إلى 100 نانومتر). هدفها هو إنشاء مواد وأجهزة جديدة ذات خصائص فريدة لا توجد في الأشكال الأكبر. على سبيل المثال، يمكن جعل المواد أقوى أو أخف وزناً أو أفضل في توصيل الكهرباء. هذا المجال يحدث ثورة في العديد من الصناعات. في الإلكترونيات، يؤدي إلى أجهزة أصغر وأسرع. في الطب، يسمح بتوصيل الأدوية الموجه وأدوات تشخيصية جديدة. ومع ذلك، تمثل تكنولوجيا النانو أيضًا تحديات. يمكن أن يكون للخصائص الجديدة للمواد النانوية عواقب غير مقصودة أو مخاطر محتملة على الصحة والبيئة. هناك حاجة إلى بحث دقيق لفهم هذه المخاطر وضمان التنمية الآمنة.
-                </p>
-            </details>
+            
+            <!-- MODIFIED: Button Container -->
+            <div class="lecture-controls">
+                <!-- ADDED TTS BUTTON -->
+                <button class="tts-button" data-target="#unit2 .lecture-notes">
+                    Pronounce Text &#128266; <!-- Speaker Icon -->
+                </button>
+                <!-- Existing Translation Dropdown -->
+                <details class="translation-drop">
+                    <summary>Show Translation</summary>
+                    <p class="arabic-text" dir="rtl" style="margin-top: 10px; text-align: right; font-style: normal;">
+                        تكنولوجيا النانو هي دراسة واستخدام الأشياء الصغيرة للغاية، والتحكم في المادة على مقياس النانو (من 1 إلى 100 نانومتر). هدفها هو إنشاء مواد وأجهزة جديدة ذات خصائص فريدة لا توجد في الأشكال الأكبر. على سبيل المثال، يمكن جعل المواد أقوى أو أخف وزناً أو أفضل في توصيل الكهرباء. هذا المجال يحدث ثورة في العديد من الصناعات. في الإلكترونيات، يؤدي إلى أجهزة أصغر وأسرع. في الطب، يسمح بتوصيل الأدوية الموجه وأدوات تشخيصية جديدة. ومع ذلك، تمثل تكنولوجيا النانو أيضًا تحديات. يمكن أن يكون للخصائص الجديدة للمواد النانوية عواقب غير مقصودة أو مخاطر محتملة على الصحة والبيئة. هناك حاجة إلى بحث دقيق لفهم هذه المخاطر وضمان التنمية الآمنة.
+                    </p>
+                </details>
+            </div>
 
             <h2>MCQ Items</h2>
             <div class="mcq-section">
@@ -559,13 +614,21 @@
                 <p>Artificial intelligence (AI) involves computer systems that perform tasks requiring human intelligence, like learning and problem-solving. AI is already impacting daily life and can revolutionize industries like healthcare and transportation.</p>
                 <p>A major advantage is efficiency. AI can analyze vast data amounts quickly and accurately, reducing errors. It can also perform dangerous or monotonous tasks and improve product quality by optimizing processes. However, AI has disadvantages. A key concern is job replacement, leading to unemployment. There is also potential for malicious use, like cyberattacks, or spreading misinformation. Ethical concerns include AI perpetuating biases or making decisions that conflict with human values. Balancing AI's benefits against its risks is crucial for a positive societal impact.</p>
             </div>
-            <!-- ADDED LECTURE TRANSLATION DROP SECTION -->
-            <details class="translation-drop" style="margin-bottom: 25px;">
-                <summary>Show Translation</summary>
-                <p class="arabic-text" dir="rtl" style="margin-top: 10px; text-align: right; font-style: normal;">
-                    يشمل الذكاء الاصطناعي (AI) أنظمة الكمبيوتر التي تؤدي مهام تتطلب ذكاءً بشريًا، مثل التعلم وحل المشكلات. يؤثر الذكاء الاصطناعي بالفعل على الحياة اليومية ويمكن أن يحدث ثورة في صناعات مثل الرعاية الصحية والنقل. الميزة الرئيسية هي الكفاءة. يمكن للذكاء الاصطناعي تحليل كميات هائلة من البيانات بسرعة ودقة، مما يقلل الأخطاء. يمكنه أيضًا أداء مهام خطيرة أو رتيبة وتحسين جودة المنتج عن طريق تحسين العمليات. ومع ذلك، للذكاء الاصطناعي عيوب. مصدر القلق الرئيسي هو استبدال الوظائف، مما يؤدي إلى البطالة. هناك أيضًا احتمال للاستخدام الضار، مثل الهجمات الإلكترونية أو نشر معلومات مضللة. تشمل المخاوف الأخلاقية ترسيخ الذكاء الاصطناعي للتحيزات أو اتخاذ قرارات تتعارض مع القيم الإنسانية. يعد تحقيق التوازن بين فوائد الذكاء الاصطناعي ومخاطره أمرًا بالغ الأهمية لتحقيق تأثير مجتمعي إيجابي.
-                </p>
-            </details>
+
+            <!-- MODIFIED: Button Container -->
+            <div class="lecture-controls">
+                <!-- ADDED TTS BUTTON -->
+                <button class="tts-button" data-target="#unit3 .lecture-notes">
+                    Pronounce Text &#128266; <!-- Speaker Icon -->
+                </button>
+                <!-- Existing Translation Dropdown -->
+                <details class="translation-drop">
+                    <summary>Show Translation</summary>
+                    <p class="arabic-text" dir="rtl" style="margin-top: 10px; text-align: right; font-style: normal;">
+                        يشمل الذكاء الاصطناعي (AI) أنظمة الكمبيوتر التي تؤدي مهام تتطلب ذكاءً بشريًا، مثل التعلم وحل المشكلات. يؤثر الذكاء الاصطناعي بالفعل على الحياة اليومية ويمكن أن يحدث ثورة في صناعات مثل الرعاية الصحية والنقل. الميزة الرئيسية هي الكفاءة. يمكن للذكاء الاصطناعي تحليل كميات هائلة من البيانات بسرعة ودقة، مما يقلل الأخطاء. يمكنه أيضًا أداء مهام خطيرة أو رتيبة وتحسين جودة المنتج عن طريق تحسين العمليات. ومع ذلك، للذكاء الاصطناعي عيوب. مصدر القلق الرئيسي هو استبدال الوظائف، مما يؤدي إلى البطالة. هناك أيضًا احتمال للاستخدام الضار، مثل الهجمات الإلكترونية أو نشر معلومات مضللة. تشمل المخاوف الأخلاقية ترسيخ الذكاء الاصطناعي للتحيزات أو اتخاذ قرارات تتعارض مع القيم الإنسانية. يعد تحقيق التوازن بين فوائد الذكاء الاصطناعي ومخاطره أمرًا بالغ الأهمية لتحقيق تأثير مجتمعي إيجابي.
+                    </p>
+                </details>
+            </div>
 
             <h2>MCQ Items</h2>
             <div class="mcq-section">
@@ -669,13 +732,21 @@
                 <p>Climate change is a pressing global issue, referring to the long-term warming of the planet. This change is caused primarily by an increase in greenhouse gases, like carbon dioxide, in the atmosphere. These gases trap heat from the sun. The main source of this increase is human activity, especially the burning of fossil fuels and deforestation.</p>
                 <p>The effects are wide-ranging, including rising sea levels, more frequent and severe natural disasters like floods and droughts, and potential food and water shortages. To address climate change, we must reduce greenhouse gas emissions. This can be done by transitioning to renewable energy sources, improving energy efficiency, and protecting forests. Individual actions, like using public transport, also help. Acting now is urgent to protect the planet.</p>
             </div>
-            <!-- ADDED LECTURE TRANSLATION DROP SECTION -->
-            <details class="translation-drop" style="margin-bottom: 25px;">
-                <summary>Show Translation</summary>
-                <p class="arabic-text" dir="rtl" style="margin-top: 10px; text-align: right; font-style: normal;">
-                    تغير المناخ قضية عالمية ملحة، تشير إلى الاحترار طويل الأمد للكوكب. هذا التغيير ناتج بشكل أساسي عن زيادة غازات الدفيئة، مثل ثاني أكسيد الكربون، في الغلاف الجوي. هذه الغازات تحبس الحرارة من الشمس. المصدر الرئيسي لهذه الزيادة هو النشاط البشري، وخاصة حرق الوقود الأحفوري وإزالة الغابات. الآثار واسعة النطاق، بما في ذلك ارتفاع مستويات سطح البحر، والكوارث الطبيعية الأكثر تواتراً وشدة مثل الفيضانات والجفاف، ونقص الغذاء والماء المحتمل. لمعالجة تغير المناخ، يجب علينا تقليل انبعاثات غازات الدفيئة. يمكن القيام بذلك عن طريق التحول إلى مصادر الطاقة المتجددة، وتحسين كفاءة الطاقة، وحماية الغابات. الإجراءات الفردية، مثل استخدام وسائل النقل العام، تساعد أيضًا. التحرك الآن أمر عاجل لحماية الكوكب.
-                </p>
-            </details>
+
+            <!-- MODIFIED: Button Container -->
+            <div class="lecture-controls">
+                <!-- ADDED TTS BUTTON -->
+                <button class="tts-button" data-target="#unit4 .lecture-notes">
+                    Pronounce Text &#128266; <!-- Speaker Icon -->
+                </button>
+                <!-- Existing Translation Dropdown -->
+                <details class="translation-drop">
+                    <summary>Show Translation</summary>
+                    <p class="arabic-text" dir="rtl" style="margin-top: 10px; text-align: right; font-style: normal;">
+                        تغير المناخ قضية عالمية ملحة، تشير إلى الاحترار طويل الأمد للكوكب. هذا التغيير ناتج بشكل أساسي عن زيادة غازات الدفيئة، مثل ثاني أكسيد الكربون، في الغلاف الجوي. هذه الغازات تحبس الحرارة من الشمس. المصدر الرئيسي لهذه الزيادة هو النشاط البشري، وخاصة حرق الوقود الأحفوري وإزالة الغابات. الآثار واسعة النطاق، بما في ذلك ارتفاع مستويات سطح البحر، والكوارث الطبيعية الأكثر توatراً وشدة مثل الفيضانات والجفاف، ونقص الغذاء والماء المحتمل. لمعالجة تغير المناخ، يجب علينا تقليل انبعاثات غازات الدفيئة. يمكن القيام بذلك عن طريق التحول إلى مصادر الطاقة المتجددة، وتحسين كفاءة الطاقة، وحماية الغابات. الإجراءات الفردية، مثل استخدام وسائل النقل العام، تساعد أيضًا. التحرك الآن أمر عاجل لحماية الكوكب.
+                    </p>
+                </details>
+            </div>
 
             <h2>MCQ Items</h2>
             <div class="mcq-section">
@@ -810,10 +881,27 @@
 
             // --- MCQ Interactivity ---
             const mcqOptionsLists = document.querySelectorAll('.mcq-options');
+            
+            // --- FIX: Added a flag for TTS warm-up ---
+            let ttsWarmedUp = false;
+            // --- END FIX ---
 
             mcqOptionsLists.forEach(optionsList => {
                 optionsList.addEventListener('click', function(e) {
                     if (e.target.tagName === 'LI') {
+                        
+                        // --- FIX: Warm up TTS API on first user interaction (MCQ click) ---
+                        if (!ttsWarmedUp && window.speechSynthesis) {
+                            const synth = window.speechSynthesis;
+                            // Speak a silent, empty string to "unlock" the API
+                            const warmUpUtterance = new SpeechSynthesisUtterance('');
+                            warmUpUtterance.volume = 0; // Make it silent
+                            synth.speak(warmUpUtterance);
+                            ttsWarmedUp = true;
+                            // console.log("TTS Warmed up."); // For debugging
+                        }
+                        // --- END FIX ---
+
                         const clickedOption = e.target;
                         
                         // Prevent re-clicking
@@ -826,7 +914,7 @@
 
                         if (isCorrect) {
                             clickedOption.classList.add('correct');
-G                        } else {
+                        } else {
                             clickedOption.classList.add('incorrect');
                             // Optionally, show the correct answer
                             const correctOption = optionsList.querySelector('li[data-correct="true"]');
@@ -848,11 +936,145 @@ G                        } else {
                 });
             });
 
+            // --- NEW: Text-to-Speech (TTS) Interactivity ---
+            const ttsButtons = document.querySelectorAll('.tts-button');
+            const synth = window.speechSynthesis;
+            let currentUtterance = null; // To track the currently speaking utterance
+            let enUsVoice = null; // Variable to hold the 'en-US' voice
+
+            // Function to load and find the 'en-US' voice
+            function loadVoices() {
+                // Return if synth is not available
+                if (!synth) return; 
+                
+                const voices = synth.getVoices();
+                // Find a specific 'en-US' voice
+                enUsVoice = voices.find(voice => voice.lang === 'en-US' || voice.lang.startsWith('en-US'));
+
+                // If not found yet, wait for the event
+                if (!enUsVoice) {
+                    synth.onvoiceschanged = () => {
+                        const voices = synth.getVoices();
+                        enUsVoice = voices.find(voice => voice.lang === 'en-US' || voice.lang.startsWith('en-US'));
+                        // As a fallback, find *any* 'en' voice
+                        if (!enUsVoice) {
+                             enUsVoice = voices.find(voice => voice.lang.startsWith('en'));
+                        }
+                        // console.log("Voices loaded, selected:", enUsVoice); // For debugging
+                    };
+                } else {
+                    // console.log("Voices already loaded, selected:", enUsVoice); // For debugging
+                }
+            }
+
+            // Load voices on script start
+            loadVoices();
+            // Handle cases where onvoiceschanged doesn't fire immediately (e.g., cached voices)
+            if (synth && synth.getVoices().length > 0) {
+                 loadVoices();
+            }
+
+            ttsButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (!synth) {
+                        console.error("Speech Synthesis not supported.");
+                        return;
+                    }
+
+                    const targetSelector = button.getAttribute('data-target');
+                    const textElement = document.querySelector(targetSelector);
+                    if (!textElement) return;
+                    
+                    // --- FIX: Robust text extraction from <p> tags ---
+                    const paragraphs = textElement.querySelectorAll('p');
+                    let textToSpeak = "";
+                    paragraphs.forEach(p => {
+                        textToSpeak += p.textContent + " "; // Add a space between paragraphs
+                    });
+                    textToSpeak = textToSpeak.trim(); // Clean up whitespace
+                    // --- END FIX ---
+
+                    if (!textToSpeak) return; // Don't speak if empty
+
+                    // Check if we are currently speaking *this* utterance
+                    if (synth.speaking && currentUtterance && currentUtterance.text === textToSpeak) {
+                        // If speaking, cancel it
+                        synth.cancel();
+                        // The onend handler will reset the button
+                    } else if (synth.speaking) {
+                        // If speaking something else, cancel it and start new speech
+                        synth.cancel();
+                        // Add a tiny delay to ensure cancel finishes before new speech starts
+                        setTimeout(() => startSpeaking(textToSpeak, button), 100);
+                    } else {
+                        // If not speaking, start new speech
+                        startSpeaking(textToSpeak, button);
+                    }
+                });
+            });
+
+            function startSpeaking(textToSpeak, button) {
+                // Ensure voices are loaded before trying to speak
+                if (synth.getVoices().length === 0) {
+                    // console.log("Voices not ready, retrying..."); // For debugging
+                    loadVoices(); // Try loading again
+                }
+
+                currentUtterance = new SpeechSynthesisUtterance(textToSpeak);
+                
+                // --- KEY FIX: Assign the loaded 'en-US' voice ---
+                if (enUsVoice) {
+                    currentUtterance.voice = enUsVoice;
+                } else {
+                    // Fallback if enUsVoice is still null
+                    currentUtterance.lang = 'en-US';
+                    // console.warn("en-US voice not found, using default."); // For debugging
+                }
+                
+                currentUtterance.onstart = () => {
+                    // Reset all other buttons
+                    resetAllTtsButtons();
+                    // Set this button to "speaking"
+                    button.classList.add('speaking');
+                    button.innerHTML = 'Stop &#128721;'; // Stop Icon
+                };
+
+                currentUtterance.onend = () => {
+                    resetAllTtsButtons(); // Reset all buttons on end
+                    currentUtterance = null;
+                };
+
+                currentUtterance.onerror = (e) => {
+                    // Don't log the generic "isTrusted" error as it's common and noisy
+                    if (e.error !== 'interrupted' && e.error !== 'canceled') {
+                         console.error('Speech synthesis error:', e);
+                    }
+                    resetAllTtsButtons();
+                    currentUtterance = null;
+                };
+
+                synth.speak(currentUtterance);
+            }
+            
+            function resetAllTtsButtons() {
+                ttsButtons.forEach(btn => {
+                    btn.classList.remove('speaking');
+                    btn.innerHTML = 'Pronounce Text &#128266;'; // Speaker Icon
+                });
+            }
+
+            // Also, cancel speech if the user navigates away
+            window.addEventListener('hashchange', () => {
+                if (synth && synth.speaking) {
+                    synth.cancel(); 
+                    // onend will fire and reset buttons
+                }
+            });
+            // --- END OF TTS SCRIPT ---
+
         });
     </script>
 
 </body>
 </html>
-
-
 
