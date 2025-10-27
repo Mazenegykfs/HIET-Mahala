@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Presentation</title>
+    <style>
+        /* General Styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, 'Times New Roman', serif;
+            background-color: #E0F7FA; /* Light Blue Background */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background-color: #004D40; /* Dark professional color */
+            color: white;
+            padding: 0 20px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 60px; /* Below header */
+            left: 0;
+            width: 250px;
+            height: calc(100vh - 60px);
+            background-color: #FFFFFF;
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 900;
+            border-right: 1px solid #B2EBF2;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+        }
+
+        .sidebar h2 {
+            color: #006064;
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', serif;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #00796B;
+            padding: 12px 15px;
+            text-decoration: none;
+            font-size: 1.1em;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s, color 0.3s;
+            font-weight: bold;
+        }
+
+        .sidebar a:hover {
+            background-color: #B2EBF2; /* Light blue hover */
+            color: #004D40;
+        }
+
+        .sidebar a.active {
+            background-color: #00796B; /* Green for active */
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            margin-top: 60px; /* Below header */
+            padding: 30px;
+        }
+
+        .main-content section {
+            background-color: #FFFFFF;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            display: none; /* Hidden by default */
+        }
+
+        .main-content section.visible {
+            display: block; /* Shown when active */
+        }
+
+        .main-content h1 {
+            color: #004D40;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #4DD0E1;
+            padding-bottom: 10px;
+            font-family: 'Times New Roman', serif;
+            font-size: 2.5em;
+        }
+
+        .main-content h2 {
+            color: #00796B;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.8em;
+        }
+
+        /* Content Specific Styling */
+        .lecture-notes p {
+            margin-bottom: 15px;
+            text-align: justify;
+            font-size: 1.1em;
+            /* Removed direction: rtl; */
+        }
+
+        .mcq-item {
+            margin-bottom: 25px;
+            background: #F8F9FA;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        
+        .mcq-item p {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .mcq-options {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .mcq-options li {
+            margin-bottom: 10px;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mcq-options li:hover {
+            background-color: #f0f0f0;
+            border-color: #00796B;
+        }
+
+        .mcq-options li.correct {
+            background-color: #C8E6C9; /* Light Green */
+            border-color: #4CAF50;
+            color: #2E7D32;
+            font-weight: bold;
+            cursor: not-allowed;
+        }
+
+        .mcq-options li.incorrect {
+            background-color: #FFCDD2; /* Light Red */
+            border-color: #F44336;
+            color: #B71C1C;
+            font-weight: bold;
+            cursor: not-allowed;
+        }
+
+        .translation-section {
+            background: #FFF8E1;
+            border: 1px solid #FFECB3;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .translation-item {
+            margin-bottom: 20px;
+        }
+
+        .translation-item h3 {
+            color: #AF6C00;
+            margin-bottom: 10px;
+        }
+
+        .translation-item .original-text {
+            font-style: italic;
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+        
+        .translation-item .arabic-text {
+            font-family: 'Arial', 'Tahoma', sans-serif;
+            font-size: 1.2em;
+            line-height: 1.8;
+            direction: rtl;
+            text-align: right;
+            font-style: normal; /* Override italic for Arabic */
+        }
+
+        /* --- ADDED FOR DROP SECTION --- */
+        .translation-drop summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #00796B;
+            background-color: #f0f9ff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #B2EBF2;
+            display: inline-block; /* To make it not full-width */
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .translation-drop summary:hover {
+            background-color: #B2EBF2;
+            color: #004D40;
+        }
+
+        .translation-drop[open] summary {
+            background-color: #00796B;
+            color: white;
+            border-color: #00796B;
+        }
+        
+        /* Style for the content inside the dropdown */
+        .translation-drop p {
+            background: #fafafa;
+            border: 1px dashed #ddd;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 6px;
+        }
+        
+        /* --- ADDED INSTITUTE TITLE STYLES --- */
+        .institute-title {
+            text-align: center;
+            color: #004D40; /* Dark professional color */
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #B2EBF2;
+        }
+        .institute-title h3 {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-family: 'Times New Roman', serif;
+        }
+        .institute-title p {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #00796B; /* Sub-color */
+            font-family: 'Times New Roman', serif;
+        }
+        /* --- END OF ADDED STYLES --- */
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                position: relative; /* Un-fix */
+            }
+
+            .sidebar {
+                position: relative; /* Un-fix */
+                width: 100%;
+                height: auto;
+                top: 0;
+                border-right: none;
+                border-bottom: 1px solid #B2EBF2;
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-top: 0;
+                padding: 15px;
+            }
+
+            .main-content section {
+                padding: 20px;
+            }
+            
+            .main-content h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        Developed by Dr. Mazen Badawy – Doctorate of English Teaching & Testing
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Units</h2>
+        <a href="#unit1" class="active">Engineering Ethics</a>
+        <a href="#unit2">Nanotechnology</a>
+        <a href="#unit3">Artificial Intelligence</a>
+        <a href="#unit4">Climate Change</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+        <!-- Unit 1: Engineering Ethics -->
+        <section id="unit1" class="visible">
+            <!-- ADDED INSTITUTE TITLE -->
+            <div class="institute-title">
+                <h3>Higher Institute of Engineering and Technology in El-Mahala El-Kobra</h3>
+                <p>"English 2"</p>
+            </div>
+            <h1>Unit 1: Engineering Ethics</h1>
+            
+            <h2>Lecture Notes: Building a Better World with Responsibility</h2>
+            <div class="lecture-notes">
+                <!-- SIMPLIFIED TEXT (106 words) -->
+                <p>Engineering ethics is the moral framework for engineers. It guides decisions to prioritize public safety, societal well-being, and environmental protection. This framework builds public trust in technology and infrastructure. Key principles include upholding honesty and integrity by providing accurate data and avoiding shortcuts. Engineers must ensure long-term safety and durability in their designs.</p>
+                <p>Environmental responsibility, such as using sustainable materials, is crucial. Engineers must also maintain professional competence, avoid conflicts of interest, and accept responsibility for their work. Adhering to these principles ensures that engineering benefits society, maintains trust, and leads to responsible innovation for future generations.</p>
+            </div>
+
+            <h2>MCQ Items</h2>
+            <div class="mcq-section">
+                <!-- UPDATED MCQS (5-8 words) -->
+                <div class="mcq-item">
+                    <p>1. What is the definition of engineering ethics?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Moral framework</li>
+                        <li>b) Profit guide</li>
+                        <li>c) Fast work</li>
+                        <li>d) Personal gain</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>2. What is a key principle?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Public safety</li>
+                        <li>b) More profit</li>
+                        <li>c) Ignoring rules</li>
+                        <li>d) Fast building</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>3. What quality must engineers always have?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Honest</li>
+                        <li>b) Dishonest</li>
+                        <li>c) Unsafe</li>
+                        <li>d) Careless</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>4. What does engineering ethics build?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Trust</li>
+                        <li>b) Doubt</li>
+                        <li>c) Fear</li>
+                        <li>d) Anger</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>5. What must engineers always protect?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Environment</li>
+                        <li>b) Company only</li>
+                        <li>c) Their profit</li>
+                        <li>d) Their secrets</li>
+                    </ul>
+                </div>
+                <!-- Q6 - Grammar -->
+                <div class="mcq-item">
+                    <p>6. What part of speech is "quickly"?</p>
+                    <ul class="mcq-options">
+                        <li>a) Noun</li>
+                        <li>b) Verb</li>
+                        <li>c) Adjective</li>
+                        <li data-correct="true">d) Adverb</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>Translation Section</h2>
+            <div class="translation-section">
+                <div class="translation-item">
+                    <h3>Translate into Arabic:</h3>
+                    <!-- CORRECTED TRANSLATION TEXT -->
+                    <p class="original-text">Engineering ethics is a moral compass. It guides engineers in their work. Following principles like safety and honesty benefits society.</p>
+                    <!-- ADDED DROP SECTION -->
+                    <details class="translation-drop">
+                        <summary>Show Translation</summary>
+                        <p class="arabic-text" dir="rtl" style="margin-top: 10px;">أخلاقيات الهندسة هي بوصلة أخلاقية. إنها توجه المهندسين في عملهم. اتباع مبادئ مثل السلامة والأمانة يفيد المجتمع.</p>
+                    </details>
+                </div>
+                <hr>
+                <div class="translation-item" dir="rtl">
+                    <h3>Translate into English:</h3>
+                    <p class="original-text arabic-text">يجب على المهندسين تعزيز كفاءتهم المهنية باستمرار، وتجنب تضارب المصالح، وتحمل المسؤولية عن عملهم، والنظر في الآثار المجتمعية.</p>
+                    <!-- ADDED DROP SECTION -->
+                    <details class="translation-drop">
+                        <summary>أظهر الترجمة</summary>
+                        <p style="margin-top: 10px; direction: ltr; text-align: left; font-style: normal;">Engineers must continually enhance their professional competence, avoid conflicts of interest, take responsibility for their work, and consider societal implications.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unit 2: Nanotechnology -->
+        <section id="unit2"> <!-- RE-ADDED UNIT 2 -->
+            <!-- ADDED INSTITUTE TITLE -->
+            <div class="institute-title">
+                <h3>Higher Institute of Engineering and Technology in El-Mahala El-Kobra</h3>
+                <p>"English 2"</p>
+            </div>
+            <h1>Unit 2: Nanotechnology</h1>
+            
+            <h2>Lecture Notes</h2>
+            <div class="lecture-notes">
+                <!-- SIMPLIFIED TEXT (119 words) -->
+                <p>Nanotechnology is the study and use of extremely small things, controlling matter at the nanoscale (1 to 100 nanometers). Its goal is to create new materials and devices with unique properties not found in larger forms. For example, materials can be made stronger, lighter, or better at conducting electricity.</p>
+                <p>This field is revolutionizing many industries. In electronics, it leads to smaller, faster devices. In medicine, it allows for targeted drug delivery and new diagnostic tools. However, nanotechnology also presents challenges. The new properties of nanomaterials could have unintended consequences or potential risks for health and the environment. Careful research is needed to understand these risks and ensure safe development.</p>
+            </div>
+
+            <h2>MCQ Items</h2>
+            <div class="mcq-section">
+                <!-- SIMPLIFIED MCQS -->
+                <div class="mcq-item">
+                    <p>1. Nanotechnology operates on what scale?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Nanoscale</li>
+                        <li>b) Macroscale</li>
+                        <li>c) Gigascale</li>
+                        <li>d) Regular scale</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>2. What new things does nanotechnology create?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Materials</li>
+                        <li>b) Planets</li>
+                        <li>c) Oceans</li>
+                        <li>d) Animals</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>3. In which field is nanotechnology used?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Medicine</li>
+                        <li>b) History</li>
+                        <li>c) Writing</li>
+                        <li>d) Art</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>4. How does nanotechnology change electronics?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Smaller</li>
+                        <li>b) Bigger</li>
+                        <li>c) Slower</li>
+                        <li>d) Heavier</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>5. What potential problem does nanotechnology have?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Risks</li>
+                        <li>b) Certainty</li>
+                        <li>c) Magic</li>
+                        <li>d) Zero issues</li>
+                    </ul>
+                </div>
+                <!-- Q6 - Grammar -->
+                <div class="mcq-item">
+                    <p>6. Which sentence is in simple future?</p>
+                    <ul class="mcq-options">
+                        <li>a) He is walking.</li>
+                        <li data-correct="true">b) He will walk.</li>
+                        <li>c) He walked.</li>
+                        <li>d) He walks.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>Translation Section</h2>
+            <div class="translation-section">
+                <div class="translation-item">
+                    <h3>Translate into Arabic:</h3>
+                    <!-- CORRECTED TRANSLATION TEXT -->
+                    <p class="original-text">Nanotechnology is a rapidly growing field. It has enormous potential to change our lives. We expect more innovative applications soon.</p>
+                    <!-- ADDED DROP SECTION -->
+                    <details class="translation-drop">
+                        <summary>Show Translation</summary>
+                        <p class="arabic-text" dir="rtl" style="margin-top: 10px;">تكنولوجيا النانو مجال سريع النمو. لديها إمكانات هائلة لتغيير حياتنا. نتوقع المزيد من التطبيقات المبتكرة قريبًا.</p>
+                    </details>
+                </div>
+                <hr>
+                <div class="translation-item" dir="rtl">
+                    <h3>Translate into English:</h3>
+                    <p class="original-text arabic-text">تتمتع تكنولوجيا النانو بالقدرة على إحداث ثورة في مجموعة واسعة من الصناعات، بما في ذلك الإلكترونيات، والطاقة، والطب، والنقل.</p>
+                    <!-- ADDED DROP SECTION -->
+                    <details class="translation-drop">
+                        <summary>أظهر الترجمة</summary>
+                        <p style="margin-top: 10px; direction: ltr; text-align: left; font-style: normal;">Nanotechnology has the potential to revolutionize a wide range of industries, including electronics, energy, medicine, and transportation.</p>
+                    </details>
+                </div>
+            </div>
+        </section> <!-- END OF UNIT 2 -->
+
+        <!-- Unit 3: Artificial Intelligence -->
+        <section id="unit3">
+            <!-- ADDED INSTITUTE TITLE -->
+            <div class="institute-title">
+                <h3>Higher Institute of Engineering and Technology in El-Mahala El-Kobra</h3>
+                <p>"English 2"</p>
+            </div>
+            <h1>Unit 3: Artificial Intelligence</h1>
+            
+            <h2>Lecture Notes</h2>
+            <div class="lecture-notes">
+                <!-- SIMPLIFIED TEXT (128 words) -->
+                <p>Artificial intelligence (AI) involves computer systems that perform tasks requiring human intelligence, like learning and problem-solving. AI is already impacting daily life and can revolutionize industries like healthcare and transportation.</p>
+                <p>A major advantage is efficiency. AI can analyze vast data amounts quickly and accurately, reducing errors. It can also perform dangerous or monotonous tasks and improve product quality by optimizing processes. However, AI has disadvantages. A key concern is job replacement, leading to unemployment. There is also potential for malicious use, like cyberattacks, or spreading misinformation. Ethical concerns include AI perpetuating biases or making decisions that conflict with human values. Balancing AI's benefits against its risks is crucial for a positive societal impact.</p>
+            </div>
+
+            <h2>MCQ Items</h2>
+            <div class="mcq-section">
+                <!-- UPDATED MCQS (5-8 words) -->
+                <div class="mcq-item">
+                    <p>1. What does AI stand for?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Artificial Intelligence</li>
+                        <li>b) Real Intelligence</li>
+                        <li>c) Auto Integration</li>
+                        <li>d) Apple Inc</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>2. How does AI perform its tasks?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Efficiently</li>
+                        <li>b) Slowly</li>
+                        <li>c) Badly</li>
+                        <li>d) Never</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>3. What can AI analyze in large amounts?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Data</li>
+                        <li>b) Rocks</li>
+                        <li>c) Rooms</li>
+                        <li>d) Cars</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>4. A risk of AI is:</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Job loss</li>
+                        <li>b) More jobs</li>
+                        <li>c) No change</li>
+                        <li>d) More money</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>5. What kind of concerns does AI raise?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Ethical</li>
+                        <li>b) Guarantees</li>
+                        <li>c) Perfection</li>
+                        <li>d) No issues</li>
+                    </ul>
+                </div>
+                <!-- Q6 - Grammar -->
+                <div class="mcq-item">
+                    <p>6. What is the past tense of "go"?</p>
+                    <ul class="mcq-options">
+                        <li>a) Gone</li>
+                        <li data-correct="true">b) Went</li>
+                        <li>c) Goes</li>
+                        <li>d) Going</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>Translation Section</h2>
+            <div class="translation-section">
+                <div class="translation-item">
+                    <h3>Translate into Arabic:</h3>
+                    <!-- CORRECTED TRANSLATION TEXT -->
+                    <p class="original-text">AI replacing jobs is a major concern. It can also be used for cyberattacks. There are ethical concerns about AI bias.</p>
+                    <!-- ADDED DROP SECTION -->
+                    <details class="translation-drop">
+                        <summary>Show Translation</summary>
+                        <p class="arabic-text" dir="rtl" style="margin-top: 10px;">يعد استبدال الذكاء الاصطناعي للوظائف مصدر قلق كبير. يمكن استخدامه أيضًا في الهجمات الإلكترونية. هناك مخاوف أخلاقية بشأن تحيز الذكاء الاصطناعي.</p>
+                    </details>
+                </div>
+                <hr>
+                <div class="translation-item" dir="rtl">
+                    <h3>Translate into English:</h3>
+                    <p class="original-text arabic-text">قد يكون لاستخدام الذكاء الاصطناعي عيوب أيضًا. أحد المخاوف هو أنه يمكن أن يحل محل الوظائف التي يشغلها الناس، مما يؤدي إلى البطالة والاضطرابات الاجتماعية. بالإضافة إلى ذلك، يمكن للذكاء الاصطناعي ان يستخدم بشكل ضار مثلما في الهجمات الإلكترونية أو نشر معلومات المضللة.</p>
+                    <!-- ADDED DROP SECTION -->
+                    <details class="translation-drop">
+                        <summary>أظهر الترجمة</summary>
+                        <p style="margin-top: 10px; direction: ltr; text-align: left; font-style: normal;">The use of AI may also have disadvantages. One concern is that it could replace human jobs, leading to unemployment and social unrest. Additionally, AI can be used for malicious purposes, such as cyberattacks or spreading misinformation.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unit 4: Climate Change -->
+        <section id="unit4"> <!-- RE-ADDED UNIT 4 -->
+            <!-- ADDED INSTITUTE TITLE -->
+            <div class="institute-title">
+                <h3>Higher Institute of Engineering and Technology in El-Mahala El-Kobra</h3>
+                <p>"English 2"</p>
+            </div>
+            <h1>Unit 4: Climate Change</h1>
+            
+            <h2>Lecture Notes: The Challenges and Possible Solutions</h2>
+            <div class="lecture-notes">
+                <!-- SIMPLIFIED TEXT (136 words) -->
+                <p>Climate change is a pressing global issue, referring to the long-term warming of the planet. This change is caused primarily by an increase in greenhouse gases, like carbon dioxide, in the atmosphere. These gases trap heat from the sun. The main source of this increase is human activity, especially the burning of fossil fuels and deforestation.</p>
+                <p>The effects are wide-ranging, including rising sea levels, more frequent and severe natural disasters like floods and droughts, and potential food and water shortages. To address climate change, we must reduce greenhouse gas emissions. This can be done by transitioning to renewable energy sources, improving energy efficiency, and protecting forests. Individual actions, like using public transport, also help. Acting now is urgent to protect the planet.</p>
+            </div>
+
+            <h2>MCQ Items</h2>
+            <div class="mcq-section">
+                <!-- SIMPLIFIED MCQS -->
+                <div class="mcq-item">
+                    <p>1. What is the definition of climate change?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Planet warming</li>
+                        <li>b) Planet cooling</li>
+                        <li>c) More ice</li>
+                        <li>d) Less sun</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>2. What is the primary cause of it?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Greenhouse gases</li>
+                        <li>b) Cold air</li>
+                        <li>c) More trees</li>
+                        <li>d) Clean rivers</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>3. Where do these greenhouse gases come from?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Human activity</li>
+                        <li>b) Animals</li>
+                        <li>c) Outer space</li>
+                        <li>d) The ocean</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>4. What is one major effect of this?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Rising seas</li>
+                        <li>b) Falling seas</li>
+                        <li>c) More snow</li>
+                        <li>d) Less rain</li>
+                    </ul>
+                </div>
+                <div class="mcq-item">
+                    <p>5. What is a good solution for this?</p>
+                    <ul class="mcq-options">
+                        <li data-correct="true">a) Renewable energy</li>
+                        <li>b) More coal</li>
+                        <li>c) More driving</li>
+                        <li>d) Cutting trees</li>
+                    </ul>
+                </div>
+                <!-- Q6 - Grammar -->
+                <div class="mcq-item">
+                    <p>6. Choose the correct word order:</p>
+                    <ul class="mcq-options">
+                        <li>a) He fast runs.</li>
+                        <li data-correct="true">b) He runs fast.</li>
+                        <li>c) Runs he fast.</li>
+                        <li>d) Fast he runs.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>Translation Section</h2>
+            <div class="translation-section">
+                <div class="translation-item">
+                    <h3>Translate into Arabic:</h3>
+                    <!-- CORRECTED TRANSLATION TEXT -->
+                    <p class="original-text">We must reduce greenhouse gas emissions. This is necessary to address climate change. We can do this by using renewable energy.</p>
+                    <!-- ADDED DROP SECTION -->
+                    <details class="translation-drop">
+                        <summary>Show Translation</summary>
+                        <p class="arabic-text" dir="rtl" style="margin-top: 10px;">يجب علينا تقليل انبعاثات غازات الدفيئة. هذا ضروري لمعالجة تغير المناخ. يمكننا القيام بذلك باستخدام الطاقة المتجددة.</p>
+                    </details>
+                </div>
+                <hr>
+                <div class="translation-item" dir="rtl">
+                    <h3>Translate into English:</h3>
+                    <p class="original-text arabic-text">يجب علينا حماية الكوكب وضمان مستقبل أفضل للجميع من خلال التكيف مع المناخ المتغير.</p>
+                    <!-- ADDED DROP SECTION -->
+                    <details class="translation-drop">
+                        <summary>أظهر الترجمة</summary>
+                        <p style="margin-top: 10px; direction: ltr; text-align: left; font-style: normal;">We must protect the planet and ensure a better future for all by adapting to the changing climate.</p>
+                    </details>
+                </div>
+            </div>
+        </section> <!-- END OF UNIT 4 -->
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            const sections = document.querySelectorAll('.main-content section');
+
+            // --- Sidebar Navigation ---
+            function updateActiveSection() {
+                let currentHash = window.location.hash;
+                
+                // Default to unit1 if no hash
+                if (!currentHash) {
+                    currentHash = '#unit1';
+                }
+
+                sections.forEach(section => {
+                    if ('#' + section.id === currentHash) {
+                        section.classList.add('visible');
+                    } else {
+                        section.classList.remove('visible');
+                    }
+                });
+
+                sidebarLinks.forEach(link => {
+                    if (link.getAttribute('href') === currentHash) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+
+            // Handle sidebar link clicks
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // We use hash change to manage state
+                });
+            });
+            
+            // Listen for hash changes to update content
+            window.addEventListener('hashchange', updateActiveSection);
+            
+            // Initial load
+            updateActiveSection();
+
+            // --- MCQ Interactivity ---
+            const mcqOptionsLists = document.querySelectorAll('.mcq-options');
+
+            mcqOptionsLists.forEach(optionsList => {
+                optionsList.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'LI') {
+                        const clickedOption = e.target;
+                        
+                        // Prevent re-clicking
+                        if (clickedOption.classList.contains('correct') || clickedOption.classList.contains('incorrect')) {
+                            return;
+                        }
+
+                        // Check correctness
+                        const isCorrect = clickedOption.getAttribute('data-correct') === 'true';
+
+                        if (isCorrect) {
+                            clickedOption.classList.add('correct');
+                        } else {
+                            clickedOption.classList.add('incorrect');
+                            // Optionally, show the correct answer
+                            const correctOption = optionsList.querySelector('li[data-correct="true"]');
+                            if (correctOption) {
+                                correctOption.classList.add('correct');
+                            }
+                        }
+                        
+                        // Disable all options in this group after selection
+                        const allOptionsInGroup = optionsList.querySelectorAll('li');
+                        allOptionsInGroup.forEach(opt => {
+                            opt.style.cursor = 'not-allowed';
+                            // Remove hover effect by detaching and re-attaching
+                            // This is a simple way to stop :hover styles from applying
+                            const newOpt = opt.cloneNode(true);
+                            opt.parentNode.replaceChild(newOpt, opt);
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>
+
+
+
